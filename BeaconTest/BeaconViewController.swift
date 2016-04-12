@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import CoreBluetooth
 
-class ViewController: UITableViewController {
+class BeaconViewController: UIViewController {
     let major = CLBeaconMajorValue(1)
     let minor = CLBeaconMinorValue(1)
     let uuid = NSUUID()
@@ -25,7 +25,7 @@ class ViewController: UITableViewController {
     }
 }
 
-extension ViewController: CBPeripheralManagerDelegate {
+extension BeaconViewController: CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
         switch peripheral.state {
         case .PoweredOn:
