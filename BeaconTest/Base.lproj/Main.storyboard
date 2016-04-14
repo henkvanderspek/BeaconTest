@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10115" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cVW-6p-Q1j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10115" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RIh-oO-4ZG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10084"/>
@@ -24,59 +24,97 @@
             </objects>
             <point key="canvasLocation" x="267" y="-747"/>
         </scene>
-        <!--Peripheral View Controller-->
-        <scene sceneID="XNI-im-xcL">
+        <!--Central-->
+        <scene sceneID="70b-fB-x7g">
             <objects>
-                <viewController id="cVW-6p-Q1j" customClass="PeripheralViewController" customModule="BeaconTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KmV-FM-x4t" customClass="CentralViewController" customModule="BeaconTest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JhO-id-mTD"/>
-                        <viewControllerLayoutGuide type="bottom" id="nhw-XG-QK9"/>
+                        <viewControllerLayoutGuide type="top" id="pdv-kW-b3r"/>
+                        <viewControllerLayoutGuide type="bottom" id="xgy-KO-26q"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pKn-AA-ycO">
+                    <view key="view" contentMode="scaleToFill" id="dmF-0E-a4h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJF-70-UYr">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <state key="normal" title="Continue"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fL6-90-uPK">
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="oT1-HN-yZ4" kind="show" id="mqW-i3-Hte"/>
+                                    <action selector="buttonClicked" destination="KmV-FM-x4t" eventType="touchUpInside" id="i8r-Zi-8nL"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fJF-70-UYr" firstAttribute="leading" secondItem="pKn-AA-ycO" secondAttribute="leading" id="Hma-No-Wi1"/>
-                            <constraint firstItem="fJF-70-UYr" firstAttribute="top" secondItem="JhO-id-mTD" secondAttribute="bottom" id="bFZ-Lb-O7K"/>
-                            <constraint firstItem="nhw-XG-QK9" firstAttribute="top" secondItem="fJF-70-UYr" secondAttribute="bottom" id="uQT-uM-CPL"/>
-                            <constraint firstAttribute="trailing" secondItem="fJF-70-UYr" secondAttribute="trailing" id="ufg-J8-46a"/>
+                            <constraint firstItem="fL6-90-uPK" firstAttribute="top" secondItem="pdv-kW-b3r" secondAttribute="bottom" id="2x8-ST-Csl"/>
+                            <constraint firstItem="fL6-90-uPK" firstAttribute="leading" secondItem="dmF-0E-a4h" secondAttribute="leading" id="E7b-Yh-qJA"/>
+                            <constraint firstItem="xgy-KO-26q" firstAttribute="top" secondItem="fL6-90-uPK" secondAttribute="bottom" id="g9f-Ah-zKV"/>
+                            <constraint firstAttribute="trailing" secondItem="fL6-90-uPK" secondAttribute="trailing" id="oSn-J7-KcY"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Central" id="GW8-GO-k3J"/>
                     <connections>
-                        <outlet property="continueButton" destination="fJF-70-UYr" id="LST-nh-eeA"/>
+                        <outlet property="button" destination="fL6-90-uPK" id="pb1-kp-FPs"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="83i-qm-6OP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SEB-zH-kdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="267" y="-42"/>
+            <point key="canvasLocation" x="-64" y="1767"/>
         </scene>
-        <!--Central View Controller-->
-        <scene sceneID="3SV-yz-hmL">
+        <!--Peripheral-->
+        <scene sceneID="97H-vr-Ntj">
             <objects>
-                <viewController id="oT1-HN-yZ4" customClass="CentralViewController" customModule="BeaconTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Uz2-gY-Tkd" customClass="PeripheralViewController" customModule="BeaconTest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0ao-Yc-aVZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="L4e-2o-mqk"/>
+                        <viewControllerLayoutGuide type="top" id="egM-h0-Pcb"/>
+                        <viewControllerLayoutGuide type="bottom" id="ysp-5A-Xga"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="L8C-SE-sy4">
+                    <view key="view" contentMode="scaleToFill" id="XBN-I7-i03">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twb-pa-32X">
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonClicked" destination="Uz2-gY-Tkd" eventType="touchUpInside" id="Sp0-05-5T3"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="twb-pa-32X" firstAttribute="leading" secondItem="XBN-I7-i03" secondAttribute="leading" id="02W-RZ-K0S"/>
+                            <constraint firstAttribute="trailing" secondItem="twb-pa-32X" secondAttribute="trailing" id="7Xl-aR-g4s"/>
+                            <constraint firstItem="ysp-5A-Xga" firstAttribute="top" secondItem="twb-pa-32X" secondAttribute="bottom" id="C1r-WU-4UN"/>
+                            <constraint firstItem="twb-pa-32X" firstAttribute="top" secondItem="egM-h0-Pcb" secondAttribute="bottom" id="tEG-Rw-JWT"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Peripheral" id="KTH-zX-HNf"/>
+                    <connections>
+                        <outlet property="button" destination="twb-pa-32X" id="1YS-kg-Nq2"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fuc-5o-KaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JZx-aj-Tu2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="-42"/>
+            <point key="canvasLocation" x="-64" y="1106"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="TF4-xd-sB5">
+            <objects>
+                <tabBarController id="RIh-oO-4ZG" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="QBH-MN-naO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Uz2-gY-Tkd" kind="relationship" relationship="viewControllers" id="x9q-dQ-sme"/>
+                        <segue destination="KmV-FM-x4t" kind="relationship" relationship="viewControllers" id="vm7-Yp-OjX"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f7e-lD-xKo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-884" y="1437"/>
         </scene>
     </scenes>
 </document>

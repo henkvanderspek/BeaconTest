@@ -16,15 +16,32 @@ let bt_service_uuid = CBUUID(string: "D0CBD57E-68FA-4F7A-9B45-F38F40FC08D8")
 let bt_characteristic_uuid = CBUUID(string: "7D1D48B0-E2D3-4A45-B703-A80F811D1124")
 
 class PeripheralViewController: UIViewController {
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var button: UIButton!
     var manager: CBPeripheralManager?
     var client: PubNub?
     var uuid = NSUUID()
     let config = PNConfiguration(publishKey: pn_publish_key, subscribeKey: pn_subscribe_key)
     override func viewDidLoad() {
         super.viewDidLoad()
-        continueButton.hidden = true
+        button.hidden = true
         manager = CBPeripheralManager(delegate: self, queue: nil)
+    }
+    @IBAction func buttonClicked() {
+        if let manager = manager where !manager.isAdvertising {
+            let type = bt_characteristic_uuid
+            let properties = CBCharacteristicProperties.Read
+            let value = uuid.UUIDString.dataUsingEncoding(NSASCIIStringEncoding)
+            let permissions = CBAttributePermissions.Readable
+            let characteristic = CBMutableCharacteristic(type: type, properties: properties, value: value, permissions: permissions)
+            let service = CBMutableService(type: bt_service_uuid, primary: true)
+            service.characteristics = [characteristic]
+            manager.addService(service)
+        } else if let manager = manager where manager.isAdvertising {
+            manager.stopAdvertising()
+            client!.unsubscribeFromAll()
+            button.setTitle("Start", forState: .Normal)
+            print("Stopped")
+        }
     }
 }
 
@@ -33,20 +50,14 @@ extension PeripheralViewController: CBPeripheralManagerDelegate {
         switch peripheral.state {
         case .PoweredOn:
             print("Powered on peripheral manager")
-            let type = bt_characteristic_uuid
-            let properties = CBCharacteristicProperties.Read
-            let value = uuid.UUIDString.dataUsingEncoding(NSASCIIStringEncoding)
-            let permissions = CBAttributePermissions.Readable
-            let characteristic = CBMutableCharacteristic(type: type, properties: properties, value: value, permissions: permissions)
-            let service = CBMutableService(type: bt_service_uuid, primary: true)
-            service.characteristics = [characteristic]
-            manager!.addService(service)
+            button.setTitle("Start", forState: .Normal)
+            button.hidden = false
         default:
             print("Peripheral manager did update state(\(peripheral.state.rawValue))")
         }
     }
     func peripheralManager(peripheral: CBPeripheralManager, didAddService service: CBService, error: NSError?) {
-        if error != nil {
+        if error == nil {
             print("Did add service")
             let data = [CBAdvertisementDataServiceUUIDsKey : [bt_service_uuid]]
             peripheral.startAdvertising(data)
@@ -57,11 +68,12 @@ extension PeripheralViewController: CBPeripheralManagerDelegate {
     func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager, error: NSError?) {
         if error == nil {
             print("Did start advertising peripheral")
+            button.setTitle("Stop", forState: .Normal)
             client = PubNub.clientWithConfiguration(config)
             client!.addListener(self)
             client!.subscribeToChannels([uuid.UUIDString], withPresence: false)
         } else {
-            print("Failed to advertise peripheral")
+            print("Failed to start advertising")
         }
     }
 }
@@ -78,10 +90,11 @@ extension PeripheralViewController: PNObjectEventListener {
             })
         default:
             print("PubNub client received status(\(status.category))")
+            print("Failed to prepare for connections")
         }
     }
     func client(client: PubNub, didReceiveMessage message: PNMessageResult) {
         print("PubNub client received message(\"\(message.data.message!)\")")
-        continueButton.hidden = false
+        print("Waiting for connections...")
     }
 }
