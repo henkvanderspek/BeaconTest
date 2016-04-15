@@ -15,6 +15,7 @@
 		B66053E01CBC28AF000243FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B66053DE1CBC28AF000243FD /* LaunchScreen.storyboard */; };
 		B67D0C1C1CBD77D300824460 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67D0C1B1CBD77D300824460 /* PeripheralViewController.swift */; };
 		B6A3BA371CBD90ED000471F2 /* CentralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A3BA361CBD90ED000471F2 /* CentralViewController.swift */; };
+		B6E8B97F1CC038DB000DEB6C /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8B97E1CC038DB000DEB6C /* Bluetooth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		B67D0C1B1CBD77D300824460 /* PeripheralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
 		B67D0C1F1CBD7CB600824460 /* BeaconTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeaconTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6A3BA361CBD90ED000471F2 /* CentralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralViewController.swift; sourceTree = "<group>"; };
+		B6E8B97D1CBFC0A4000DEB6C /* BeaconTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = BeaconTest.playground; sourceTree = "<group>"; };
+		B6E8B97E1CC038DB000DEB6C /* Bluetooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
 		D095009987B8C96AF0553DE8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -65,6 +68,7 @@
 		B66053C71CBC28AF000243FD = {
 			isa = PBXGroup;
 			children = (
+				B6E8B97D1CBFC0A4000DEB6C /* BeaconTest.playground */,
 				B66053D21CBC28AF000243FD /* BeaconTest */,
 				B66053D11CBC28AF000243FD /* Products */,
 				331F6DBACBF3CBB06484D034 /* Pods */,
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				B66053D31CBC28AF000243FD /* AppDelegate.swift */,
+				B6E8B97E1CC038DB000DEB6C /* Bluetooth.swift */,
 				B66053D71CBC28AF000243FD /* BeaconViewController.swift */,
 				B6A3BA361CBD90ED000471F2 /* CentralViewController.swift */,
 				B67D0C1B1CBD77D300824460 /* PeripheralViewController.swift */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B66053D81CBC28AF000243FD /* BeaconViewController.swift in Sources */,
+				B6E8B97F1CC038DB000DEB6C /* Bluetooth.swift in Sources */,
 				B67D0C1C1CBD77D300824460 /* PeripheralViewController.swift in Sources */,
 				B6A3BA371CBD90ED000471F2 /* CentralViewController.swift in Sources */,
 				B66053D41CBC28AF000243FD /* AppDelegate.swift in Sources */,

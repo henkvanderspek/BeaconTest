@@ -17,66 +17,46 @@ let bt_characteristic_uuid = CBUUID(string: "7D1D48B0-E2D3-4A45-B703-A80F811D112
 
 class PeripheralViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
-    var manager: CBPeripheralManager?
     var client: PubNub?
     var uuid = NSUUID()
     let config = PNConfiguration(publishKey: pn_publish_key, subscribeKey: pn_subscribe_key)
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        button.hidden = true
-        manager = CBPeripheralManager(delegate: self, queue: nil)
-    }
+    
     @IBAction func buttonClicked() {
-        if let manager = manager where !manager.isAdvertising {
-            let type = bt_characteristic_uuid
-            let properties = CBCharacteristicProperties.Read
-            let value = uuid.UUIDString.dataUsingEncoding(NSASCIIStringEncoding)
-            let permissions = CBAttributePermissions.Readable
-            let characteristic = CBMutableCharacteristic(type: type, properties: properties, value: value, permissions: permissions)
-            let service = CBMutableService(type: bt_service_uuid, primary: true)
-            service.characteristics = [characteristic]
-            manager.addService(service)
-        } else if let manager = manager where manager.isAdvertising {
-            manager.stopAdvertising()
-            client!.unsubscribeFromAll()
-            button.setTitle("Start", forState: .Normal)
-            print("Stopped")
-        }
+        let string = uuid.UUIDString
+        Bluetooth.Service.defaultUuid = bt_service_uuid
+        Bluetooth.Characteristic.defaultUuid = bt_characteristic_uuid
+        Bluetooth.Peripheral.advertise(string,
+            success: {
+                print("Advertising service")
+            },
+            failure: {
+                print("Failed to advertise service")
+            })
     }
 }
 
-extension PeripheralViewController: CBPeripheralManagerDelegate {
-    func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
-        switch peripheral.state {
-        case .PoweredOn:
-            print("Powered on peripheral manager")
-            button.setTitle("Start", forState: .Normal)
-            button.hidden = false
-        default:
-            print("Peripheral manager did update state(\(peripheral.state.rawValue))")
-        }
-    }
-    func peripheralManager(peripheral: CBPeripheralManager, didAddService service: CBService, error: NSError?) {
-        if error == nil {
-            print("Did add service")
-            let data = [CBAdvertisementDataServiceUUIDsKey : [bt_service_uuid]]
-            peripheral.startAdvertising(data)
-        } else {
-            print("Failed to add service")
-        }
-    }
-    func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager, error: NSError?) {
-        if error == nil {
-            print("Did start advertising peripheral")
-            button.setTitle("Stop", forState: .Normal)
-            client = PubNub.clientWithConfiguration(config)
-            client!.addListener(self)
-            client!.subscribeToChannels([uuid.UUIDString], withPresence: false)
-        } else {
-            print("Failed to start advertising")
-        }
-    }
-}
+//self.button.hidden = true
+//self.client = PubNub.clientWithConfiguration(self.config)
+//self.client!.addListener(self)
+//self.client!.subscribeToChannels([string], withPresence: false)
+//        }
+//        if let manager = manager where !manager.isAdvertising {
+//        } else if let manager = manager where manager.isAdvertising {
+//            manager.stopAdvertising()
+//            client!.unsubscribeFromAll()
+//            button.setTitle("Start", forState: .Normal)
+//            print("Stopped")
+//        }
+//    }
+//}
+//            client = PubNub.clientWithConfiguration(config)
+//            client!.addListener(self)
+//            client!.subscribeToChannels([uuid.UUIDString], withPresence: false)
+//        } else {
+//            print("Failed to start advertising")
+//        }
+//    }
+//}
 
 extension PeripheralViewController: PNObjectEventListener {
     func client(client: PubNub, didReceiveStatus status: PNStatus) {
